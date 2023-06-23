@@ -3,7 +3,10 @@ name: Install
 on:
  push:
   branches:
-   - master
+   - dev
+
+
+#   - master
 
 # remove the following line to run
 # if: ${{ false }}
