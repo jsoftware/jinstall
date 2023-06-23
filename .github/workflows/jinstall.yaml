@@ -1,0 +1,154 @@
+name: Install
+
+on:
+ push:
+  branches:
+   - master
+
+# remove the following line to run
+# if: ${{ false }}
+
+jobs:
+
+# install --------------------------------------------------------------
+ install:
+  name: Installers
+  runs-on: ubuntu-20.04
+  steps:
+   - name: Checkout Git repository
+     uses: actions/checkout@v3
+
+   - name: Build
+     run: |
+      sudo apt-get install -y dos2unix
+      script/build.sh
+
+   - name: Release
+     uses: ncipollo/release-action@v1
+     with:
+      tag: build
+      artifacts: "fbsd64.tar.gz,linux64.tar.gz,mac64.zip,obsd64.tar.gz,raspi32.tar.gz,raspi64.tar.gz,win64.zip,build.txt,revision.txt"
+      token: ${{ secrets.GITHUB_TOKEN }}
+      allowUpdates: true
+      replacesArtifacts: true
+
+# windows AIO ----------------------------------------------------------
+ winaio:
+  name: WinAIO
+  runs-on: windows-latest
+  needs: install
+  steps:
+   - name: Checkout Git repository
+     uses: actions/checkout@v3
+     env:
+        password: ${{ secrets.PASSWORD }}
+        url: https://github.com/${{github.repository}}
+
+   - name: Get revision
+     uses: dsaltares/fetch-gh-release-asset@master
+     with:
+      file: 'revision.txt'
+      target: 'revision.txt'
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: Get winzip
+     uses: dsaltares/fetch-gh-release-asset@master
+     with:
+      file: 'win64.zip'
+      target: 'win64.zip'
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: List
+     shell: pwsh
+     run: dir
+
+   - name: Get version
+     shell: pwsh
+     run: script\getversion.ps1
+
+   - name: Get files
+     shell: pwsh
+     run: script\getfiles.ps1 0
+
+   - name: Build AIO
+     uses: joncloud/makensis-action@v4
+
+   - name: Rename build
+     shell: pwsh
+     run: script\rename.ps1 0
+
+   - name: Release WinAIO
+     uses: ncipollo/release-action@v1
+     with:
+      tag: build
+      artifacts: win64.exe
+      token: ${{ secrets.GITHUB_TOKEN }}
+      allowUpdates: true
+      replacesArtifacts: true
+
+# windows slim AIO -----------------------------------------------------
+ winaios:
+  name: WinAIOslim
+  runs-on: windows-latest
+  needs: install
+  steps:
+   - name: Checkout Git repository
+     uses: actions/checkout@v3
+     env:
+        password: ${{ secrets.PASSWORD }}
+        url: https://github.com/${{github.repository}}
+
+   - name: Get revision
+     uses: dsaltares/fetch-gh-release-asset@master
+     with:
+      file: 'revision.txt'
+      target: 'revision.txt'
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: Get winzip
+     uses: dsaltares/fetch-gh-release-asset@master
+     with:
+      file: 'win64.zip'
+      target: 'win64.zip'
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: List
+     shell: pwsh
+     run: dir
+
+   - name: Get version
+     shell: pwsh
+     run: script\getversion.ps1
+
+   - name: Get files
+     shell: pwsh
+     run: script\getfiles.ps1 1
+
+   - name: Build AIO
+     uses: joncloud/makensis-action@v4
+
+   - name: Rename build
+     shell: pwsh
+     run: script\rename.ps1 0
+
+   - name: Release WinAIO
+     uses: ncipollo/release-action@v1
+     with:
+      tag: build
+      artifacts: win64_slim.exe
+      token: ${{ secrets.GITHUB_TOKEN }}
+      allowUpdates: true
+      replacesArtifacts: true
+
+# webhook --------------------------------------------------------------
+ webhook:
+  name: Run Webhook
+  runs-on: ubuntu-20.04
+  needs: [winaio, winaios]
+  steps:
+   - name: distribution
+     uses: distributhor/workflow-webhook@v2
+     env:
+      webhook_url: ${{ secrets.WEBHOOK_URL }}
+      webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+      data: '{ "id": "jinstall" }'
