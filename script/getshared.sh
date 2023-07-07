@@ -17,7 +17,6 @@ cd $S
 
 # base9 library
 wget -nc -q $J/download/library/base9.tar.gz > /dev/null
-#cp ~/libtars/base9.tar.gz .
 tar -xvf base9.tar.gz
 rm -f *.gz
 cp -R $H/common/* install
@@ -27,7 +26,7 @@ cd $M
 W="${V:1}"
 K=${W%.*}
 L=${W#*.}
-if [ 1 = ${#L} ] ; then L="0$L"; fils l
+if [ 1 = ${#L} ] ; then L="0$L"; fi
 D=$J/jal/j"$K$L"
 wget $D/addons.txt
 
@@ -36,7 +35,6 @@ g() {
   E=`echo $1 | cut -d " " -f2`
   F="${B}_${E}_linux.tar.gz"
   wget $D/addons/$F > /dev/null
-  #cp ~/libtars/$F .
   tar xvf $F
 }
 
