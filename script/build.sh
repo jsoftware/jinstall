@@ -43,6 +43,7 @@ cp $P/misc/install-usr.sh .
 wget $E/linux/j64/jconsole
 wget $E/linux/j64/libj.so
 wget $E/linux/j64/libgmp.so
+chmod +x jconsole
 cd ../tools/regex
 wget $RX/libjpcre2.so
 cd $W/..
@@ -59,6 +60,7 @@ cp $P/misc/install-usr.sh .
 wget $E/freebsd/j64/jconsole
 wget $E/freebsd/j64/libj.so
 wget $E/freebsd/j64/libgmp.so
+chmod +x jconsole
 cd ../tools/regex
 wget $RX/libjpcre2.so
 cd $W/..
@@ -75,6 +77,7 @@ cp $P/misc/install-usr.sh .
 wget $E/openbsd/j64/jconsole
 wget $E/openbsd/j64/libj.so
 wget $E/openbsd/j64/libgmp.so
+chmod +x jconsole
 cd ../tools/regex
 wget $RX/libjpcre2.so
 cd $W/..
@@ -90,6 +93,7 @@ cd bin
 wget $E/raspberry/j32/jconsole
 wget $E/raspberry/j32/libj.so
 wget $E/raspberry/j32/libgmp.so
+chmod +x jconsole
 cd ../tools/regex
 wget $RX/raspberry/j32/libjpcre2.so
 cd $W/..
@@ -105,6 +109,7 @@ cd bin
 wget $E/raspberry/j64/jconsole
 wget $E/raspberry/j64/libj.so
 wget $E/raspberry/j64/libgmp.so
+chmod +x jconsole
 cd ../tools/regex
 wget $RX/raspberry/j64/libjpcre2.so
 cd $W/..
@@ -120,6 +125,7 @@ cd bin
 wget $E/darwin/j64/jconsole
 wget $E/darwin/j64/libj.dylib
 wget $E/darwin/j64/libgmp.dylib
+chmod +x jconsole
 cd ../tools/regex
 wget $RX/libjpcre2.dylib
 cd $W/..
