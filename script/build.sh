@@ -7,7 +7,8 @@ read -r V < release.txt
 V=j$V
 
 E=https://www.jsoftware.com/download/jengine/$V
-RX=https://github.com/jsoftware/jsource/blob/master/jlibrary/tools/regex
+RX=https://github.com/jsoftware/jsource/raw/master/jlibrary/tools/regex
+GREP=https://github.com/jsoftware/ide_jhs/raw/master/grep.exe
 
 M=~/libtemp # temp files
 S=~/libshared # common files
@@ -46,8 +47,6 @@ cd ../tools/regex
 wget $RX/libjpcre2.so
 cd $W/..
 maketar linux64
-
-#if false; then
 
 # fbsd64 ---------------------------------------------------------------
 W=$T/fbsd64/$V
@@ -126,8 +125,6 @@ wget $RX/libjpcre2.dylib
 cd $W/..
 makezip mac64
 
-#fi
-
 # w64 ---------------------------------------------------------------
 W=$T/w64/$V
 mkdir -p $W/bin
@@ -135,6 +132,8 @@ cd $W
 cp -R $S/install/* .
 cp -R $P/win/* .
 find . -type f -print0 | xargs -0 unix2dos
+cd $W/addons/ide/jhs
+wget $GREP
 cd bin
 wget $E/windows/j64/jconsole.exe
 wget $E/windows/j64/j.dll
