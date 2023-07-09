@@ -134,7 +134,7 @@ cp -R $P/win/* .
 find . -type f -print0 | xargs -0 unix2dos
 cd $W/addons/ide/jhs
 wget $GREP
-cd bin
+cd $W/bin
 wget $E/windows/j64/jconsole.exe
 wget $E/windows/j64/j.dll
 wget $E/windows/j64/mpir.dll
