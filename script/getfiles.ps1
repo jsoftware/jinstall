@@ -10,7 +10,7 @@ $ver = Get-Content -Path "revision.txt" -Raw
 $t = $ver.Split(".")
 $maj = $t[0]
 $min = $t[1]
-$rev = $t[2].Split("-")[0]
+$rev = $t[2].Split("-")[0].Trim()
 
 $rnum = ($maj + "." + $min)
 $rver = ($rnum + "." + $rev)
