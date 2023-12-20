@@ -1,4 +1,4 @@
-# build J installers
+﻿# build J installers
 
 release.txt has the J release number as major.minor e.g. 9.5.
 
@@ -10,8 +10,12 @@ Other files need not be changed.
 
 ## Method
 
-For now, this requires two manual steps. In the following REL is the J release number with a 'j' prefix, e.g. j9.5.
+In the following REL is the J release number with a 'j' prefix, e.g. j9.5.
 
-* jsource repo builds the JE binaries. Any change to the version.txt file triggers copy to the download/jengine/staged area of the webserver. If OK, then manually push this to the download/jengine/REL folder. 
-* base9 repo builds the base library + required addons. Any commit updates the download/library folder.
-* jinstall repo builds the installers. Make any update to the build.txt file, then commit. This builds the installers which are written to the download/REL/staged area. If OK, then manually push this to the download/REL/install area and run installer.sh REL (as sudo).
+* qtide repo builds REL/qtidedev - then manual copy to REL/qtide (this is the only manual step).
+
+* base9 repo builds the base library in download/library/base9.tar.gz.
+
+* jsource repo builds the JE binaries in github.com/jsoftware/jsource/releases/tag/build. Update the version number in version.txt to copy to download/jengine/REL and then run jinstall.
+
+* jinstall repo builds the installers. Make any update to the build.txt file, then commit.

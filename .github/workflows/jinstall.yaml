@@ -4,6 +4,7 @@ on:
  push:
   branches:
    - master
+ workflow_dispatch:
 
 # remove the following line to run
 # if: ${{ false }}
