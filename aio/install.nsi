@@ -1,9 +1,9 @@
 # 27 Jan 2023 09:24
 
 # substition examples:
-# XXX 9.4
-# YYY 9.4.1
-# ZZZ "" or "_slim"
+# 3X 9.4
+# 3Y 9.4.1
+# 3Z "" or "_slim"
 
 Name "JXXX"
 SetCompressor /SOLID lzma
