@@ -23,6 +23,8 @@ done
 $P/script/getrevision.sh $V
 $P/script/getshared.sh $V $P $M $S
 
+cat revision.txt
+
 maketar() {
  tar -cf $Z/$1.tar *
  gzip -f $Z/$1.tar

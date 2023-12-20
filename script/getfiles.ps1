@@ -46,6 +46,8 @@ $ini = "install.nsi"
 ((Get-Content -path $ini -Raw) -replace 'YYY',$rver) | Set-Content -path $ini
 ((Get-Content -path $ini -Raw) -replace 'ZZZ',$slim) | Set-Content -path $ini
 
+cat $ini
+
 $pfn = "c:\program files (x86)\nsis\"
 cp CPUFeatures.dll ($pfn + "plugins\x86-unicode")
 cp CPUFeatures.nsh ($pfn + "include")
