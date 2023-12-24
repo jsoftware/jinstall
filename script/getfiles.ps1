@@ -2,9 +2,8 @@
 #
 # argument 0=full, 1=slim
 
-# e.g. 9.4.0-beta13
+# e.g. 9.6.0-beta1
 $ver = Get-Content -Path "revision.txt" -Raw
-#$ver = "9.5.0-beta3"
 
 # get major, minor, revision numbers:
 $t = $ver.Split(".")

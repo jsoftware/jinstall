@@ -2,7 +2,7 @@
 #
 # read in shared files
 
-# e.g. j9.5 home temp shared
+# e.g. j9.6 home temp shared
 V=$1
 H=$2
 M=$3

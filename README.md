@@ -1,6 +1,6 @@
 ﻿# build J installers
 
-release.txt has the J release number as major.minor e.g. 9.5.
+release.txt has the J release number as major.minor e.g. 9.6.
 
 build.txt has a dummy build number.
 Any change to it triggers copy build to the jsoftware server.
@@ -10,7 +10,7 @@ Other files need not be changed.
 
 ## Method
 
-In the following REL is the J release number with a 'j' prefix, e.g. j9.5.
+In the following REL is the J release number with a 'j' prefix, e.g. j9.6.
 
 * qtide repo builds REL/qtidedev - then manual copy to REL/qtide (this is the only manual step).
 

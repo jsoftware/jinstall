@@ -1,1 +1,1 @@
-j9.5 install
+j9.6 install
