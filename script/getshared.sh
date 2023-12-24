@@ -8,6 +8,10 @@ H=$2
 M=$3
 S=$4
 
+W="${V:1}"
+K=${W%.*}
+L=${W#*.}
+
 mkdir -p $M
 rm -rf $M/*
 
@@ -16,16 +20,14 @@ J=https://www.jsoftware.com
 cd $S
 
 # base9 library
-wget -nc -q $J/download/library/base9.tar.gz > /dev/null
-tar -xvf base9.tar.gz
+N=base${W}.tar.gz
+wget -nc -q $J/download/library/$N > /dev/null
+tar -xvf $N
 rm -f *.gz
 cp -R $H/common/* install
 
 # required addons
 cd $M
-W="${V:1}"
-K=${W%.*}
-L=${W#*.}
 if [ 1 = ${#L} ] ; then L="0$L"; fi
 D=$J/jal/j"$K$L"
 wget $D/addons.txt
