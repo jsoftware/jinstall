@@ -2,8 +2,7 @@ name: Install
 
 on:
  push:
-  branches:
-   - master
+  branches: [ 9.5 ]
  workflow_dispatch:
 
 # remove the following line to run
@@ -140,16 +139,3 @@ jobs:
       token: ${{ secrets.GITHUB_TOKEN }}
       allowUpdates: true
       replacesArtifacts: true
-
-# webhook --------------------------------------------------------------
- webhook:
-  name: Run Webhook
-  runs-on: ubuntu-20.04
-  needs: [winaio, winaios]
-  steps:
-   - name: distribution
-     uses: distributhor/workflow-webhook@v2
-     env:
-      webhook_url: ${{ secrets.WEBHOOK_URL }}
-      webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-      data: '{ "id": "jinstall" }'
