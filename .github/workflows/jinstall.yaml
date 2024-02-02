@@ -26,7 +26,7 @@ jobs:
    - name: Release
      uses: ncipollo/release-action@v1
      with:
-      tag: build
+      tag: build95
       artifacts: "fbsd64.tar.gz,linux64.tar.gz,mac64.zip,obsd64.tar.gz,raspi32.tar.gz,raspi64.tar.gz,win64.zip,build.txt,revision.txt"
       token: ${{ secrets.GITHUB_TOKEN }}
       allowUpdates: true
@@ -80,7 +80,7 @@ jobs:
    - name: Release WinAIO
      uses: ncipollo/release-action@v1
      with:
-      tag: build
+      tag: build95
       artifacts: win64.exe
       token: ${{ secrets.GITHUB_TOKEN }}
       allowUpdates: true
@@ -134,7 +134,7 @@ jobs:
    - name: Release WinAIO
      uses: ncipollo/release-action@v1
      with:
-      tag: build
+      tag: build95
       artifacts: win64_slim.exe
       token: ${{ secrets.GITHUB_TOKEN }}
       allowUpdates: true
