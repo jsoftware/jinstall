@@ -1,9 +1,5 @@
 # get info from version.txt for github actions
 
-#wget https://github.com/jsoftware/dist/releases/download/build/revision.txt -OutFile revision.txt
-#wget https://github.com/cdburke/jstest/releases/download/build/revision.txt  -OutFile revision.txt
-#Invoke-WebRequest "https://www.jsoftware.com/download/jengine/revision.txt" -OutFile revision.txt
-
 $rev = Get-Content -Path "revision.txt"
 
 $t = $rev.Split(".")
