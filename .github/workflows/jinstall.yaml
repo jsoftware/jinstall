@@ -2,8 +2,7 @@ name: Install
 
 on:
  push:
-  branches:
-   - master
+  branches: [ master ]
  workflow_dispatch:
 
 # remove the following line to run
