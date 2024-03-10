@@ -2,7 +2,7 @@
 #
 # write revision.txt as full revision name, e.g. 9.6.0-beta1
 
-echo ("getrevision arg = " + $1)
+echo "getrevision arg = $1"
 
 rm -f version*
 wget https://www.jsoftware.com/download/jengine/$1/version.txt

@@ -4,4 +4,5 @@
 
 cd "$(dirname "$0")"
 
-xattr -rc *
+/usr/bin/xattr -rc *
+
