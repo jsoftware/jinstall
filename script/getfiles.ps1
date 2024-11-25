@@ -1,6 +1,8 @@
 # get windows AIO files into resources folder
 #
-# argument 0=full, 1=slim
+# arguments (must be given)
+  [0] 0=full, 1=slim
+  [1] 0=amd, 2=arm
 
 # e.g. 9.6.0-beta1
 $ver = Get-Content -Path "revision.txt" -Raw
@@ -14,21 +16,28 @@ $rev = $t[2].Split("-")[0].Trim()
 $rnum = ($maj + "." + $min)
 $rver = ($rnum + "." + $rev)
 $rel = ("j" + $rnum)
-#$zip = ($rel + "_win64.zip")
-$zip = ("win64.zip")
 
 $bin = "resources\x64\bin"
 $obin = ("-o" + $bin)
 
-if ($args -eq 1) {
+if ($args[1] -eq 1) {
+  $arm64 = "-arm64"
+  $zip = "win64.zip"
+}
+else {
+  $arm64 = ""
+  $zip = "winarm64.zip"
+}
+
+if ($args[0] -eq 1) {
   $slim = "_slim"
-  $jqt = "jqt-win-slim.zip"
-  $qtl = "qt65-win-slim-x64.zip"
+  $jqt = "jqt-win" + $arm64 + "-slim.zip"
+  $qtl = "qt68-win" + $arm64 + "-slim-x64.zip"
 }
 else {
   $slim = ""
   $jqt = "jqt-win.zip"
-  $qtl = "qt65-win-x64.zip"
+  $qtl = "qt68-win-x64.zip"
 }
 
 echo ("ver = " + $ver)

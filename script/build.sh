@@ -152,5 +152,24 @@ wget $RX/jpcre2.dll
 cd $W/..
 makezip win64
 
+# warm64 ---------------------------------------------------------------
+echo "build warm64"
+W=$T/warm64/$V
+mkdir -p $W/bin
+cd $W
+cp -R $S/install/* .
+cp -R $P/win/* .
+find . -type f -print0 | xargs -0 unix2dos
+cd $W/addons/ide/jhs
+wget $GREP
+cd $W/bin
+wget $E/windows/jarm64/j.dll
+wget $E/windows/jarm64/jconsole.exe
+wget $E/windows/jarm64/mpir.dll
+cd ../tools/regex
+wget $RX/jpcre2.dll
+cd $W/..
+makezip winarm64
+
 # cp to home -----------------------------------------------------------
 cp $Z/* $P
