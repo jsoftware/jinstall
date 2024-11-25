@@ -88,6 +88,7 @@ jobs:
 
 # windows slim AIO -----------------------------------------------------
  winaios:
+  if: ${{ false }}
   name: WinAIOslim
   runs-on: windows-latest
   needs: install
@@ -142,6 +143,7 @@ jobs:
 
 # windows arm slim AIO -----------------------------------------------------
  winarmaios:
+  if: ${{ false }}
   name: WinarmAIOslim
   runs-on: windows-latest
   needs: install

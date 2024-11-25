@@ -4,6 +4,8 @@
 #  [0] 0=full, 1=slim
 #  [1] 0=amd, 2=arm
 
+echo "getfiles $args = " + $args
+
 # e.g. 9.6.0-beta1
 $ver = Get-Content -Path "revision.txt" -Raw
 
@@ -20,25 +22,20 @@ $rel = ("j" + $rnum)
 $bin = "resources\x64\bin"
 $obin = ("-o" + $bin)
 
-if ($args[1] -eq 1) {
-  $arm64 = "-arm64"
-  $zip = "win64.zip"
-}
-else {
-  $arm64 = ""
-  $zip = "winarm64.zip"
-}
-
 if ($args[0] -eq 1) {
   $slim = "_slim"
-  $jqt = "jqt-win" + $arm64 + "-slim.zip"
-  $qtl = "qt68-win" + $arm64 + "-slim-x64.zip"
+}
+
+if ($args[1] -eq 1) {
+  $arm64 = "-arm64"
+  $zip = "winarm64.zip"
 }
 else {
-  $slim = ""
-  $jqt = "jqt-win.zip"
-  $qtl = "qt68-win-x64.zip"
+  $zip = "win64.zip"
 }
+
+$jqt = "jqt-win" + $arm64 + $slim + ".zip"
+$qtl = "qt68-win" + $arm64 + $slim + ".zip"
 
 echo ("ver = " + $ver)
 echo ("args = " + $args)
