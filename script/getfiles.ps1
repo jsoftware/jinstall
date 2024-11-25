@@ -1,8 +1,8 @@
 # get windows AIO files into resources folder
 #
 # arguments (must be given)
-  [0] 0=full, 1=slim
-  [1] 0=amd, 2=arm
+#  [0] 0=full, 1=slim
+#  [1] 0=amd, 2=arm
 
 # e.g. 9.6.0-beta1
 $ver = Get-Content -Path "revision.txt" -Raw
