@@ -28,13 +28,13 @@ if ($args[0] -eq 1) {
 
 if ($args[1] -eq 1) {
   $arm64 = "-arm64"
-  $rwin = "warm64"
-  $zip = "winarm64.zip"
+  $rwin = "winarm64"
 }
 else {
   $rwin = "win64"
-  $zip = "win64.zip"
 }
+
+$zip = ($rwin + ".zip")
 
 $jqt = ("jqt-win" + $arm64 + $slim + ".zip")
 $qtl = ("qt68-win" + $arm64 + $slim + ".zip")
