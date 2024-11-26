@@ -24,6 +24,7 @@ $obin = ("-o" + $bin)
 
 if ($args[0] -eq 1) {
   $slim = "-slim"
+  $slip = "_slim"
 }
 
 if ($args[1] -eq 1) {
@@ -50,7 +51,6 @@ echo ("zip = " + $zip)
 Copy-Item -Path aio\* -Destination . -Recurse
 
 $ini = "install.nsi"
-$slip = $slim.replace('-','_')
 ((Get-Content -path $ini -Raw) -replace 'VVV',$rwin) | Set-Content -path $ini
 ((Get-Content -path $ini -Raw) -replace 'XXX',$rnum) | Set-Content -path $ini
 ((Get-Content -path $ini -Raw) -replace 'YYY',$rver) | Set-Content -path $ini
