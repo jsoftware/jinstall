@@ -36,8 +36,8 @@ else {
   $zip = "win64.zip"
 }
 
-$jqt = "jqt-win" + $arm64 + $slim + ".zip"
-$qtl = "qt68-win" + $arm64 + $slim + ".zip"
+$jqt = ("jqt-win" + $arm64 + $slim + ".zip")
+$qtl = ("qt68-win" + $arm64 + $slim + ".zip")
 
 echo ("ver = " + $ver)
 echo ("args = " + $args)
@@ -68,6 +68,7 @@ cd temp
 $url = ("www.jsoftware.com/download/" + $rel)
 mv ..\$zip .
 #Invoke-WebRequest -UseBasicParsing ($url + "/install/" + $zip) -outfile $zip
+echo ($url + "/qtide/" + $jqt)
 Invoke-WebRequest -UseBasicParsing ($url + "/qtide/" + $jqt) -outfile $jqt
 Invoke-WebRequest -UseBasicParsing ($url + "/qtlib/" + $qtl) -outfile $qtl
 cd ..
