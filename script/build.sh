@@ -7,7 +7,7 @@ read -r V < release.txt
 V=j$V
 
 E=https://www.jsoftware.com/download/jengine/$V
-RX=https://github.com/jsoftware/jsource/raw/master/jlibrary/tools/regex
+RX=https://github.com/jsoftware/jsource/raw/master/pcre2
 GREP=https://github.com/jsoftware/ide_jhs/raw/master/grep.exe
 
 M=~/libtemp # temp files
@@ -47,7 +47,7 @@ wget $E/linux/j64/libj.so
 wget $E/linux/j64/libgmp.so
 chmod +x jconsole
 cd ../tools/regex
-wget $RX/libjpcre2.so
+wget $RX/linux/x86_64/libjpcre2.so
 cd $W/..
 maketar linux64
 
@@ -64,7 +64,7 @@ wget $E/freebsd/j64/libj.so
 wget $E/freebsd/j64/libgmp.so
 chmod +x jconsole
 cd ../tools/regex
-wget $RX/libjpcre2.so
+wget $RX/freebsd/x86_64/libjpcre2.so
 cd $W/..
 maketar fbsd64
 
@@ -81,7 +81,7 @@ wget $E/openbsd/j64/libj.so
 wget $E/openbsd/j64/libgmp.so
 chmod +x jconsole
 cd ../tools/regex
-wget $RX/libjpcre2.so
+wget $RX/openbsd/x86_64/libjpcre2.so
 cd $W/..
 maketar obsd64
 
@@ -97,7 +97,7 @@ wget $E/raspberry/j32/libj.so
 wget $E/raspberry/j32/libgmp.so
 chmod +x jconsole
 cd ../tools/regex
-wget $RX/raspberry/j32/libjpcre2.so
+#wget $RX/raspberry/j32/libjpcre2.so
 cd $W/..
 maketar raspi32
 
@@ -113,7 +113,7 @@ wget $E/raspberry/j64/libj.so
 wget $E/raspberry/j64/libgmp.so
 chmod +x jconsole
 cd ../tools/regex
-wget $RX/raspberry/j64/libjpcre2.so
+#wget $RX/raspberry/j64/libjpcre2.so
 cd $W/..
 maketar raspi64
 
@@ -129,7 +129,7 @@ wget $E/darwin/j64/libj.dylib
 wget $E/darwin/j64/libgmp.dylib
 chmod +x jconsole
 cd ../tools/regex
-wget $RX/libjpcre2.dylib
+wget $RX/apple/macos/libjpcre2.dylib
 cd $W/..
 makezip mac64
 
@@ -148,7 +148,7 @@ wget $E/windows/j64/j.dll
 wget $E/windows/j64/mpir.dll
 wget $E/windows/j64/pthreadVC3.dll
 cd ../tools/regex
-wget $RX/jpcre2.dll
+wget $RX/windows/x64/jpcre2.dll
 cd $W/..
 makezip win64
 
@@ -166,8 +166,9 @@ cd $W/bin
 wget $E/windows/jarm64/j.dll
 wget $E/windows/jarm64/jconsole.exe
 wget $E/windows/jarm64/mpir.dll
+wget $E/windows/jarm64/pthreadVC3.dll
 cd ../tools/regex
-wget $RX/jpcre2.dll
+wget $RX/windows/arm64/jpcre2.dll
 cd $W/..
 makezip winarm64
 
