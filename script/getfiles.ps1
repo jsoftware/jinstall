@@ -28,9 +28,11 @@ if ($args[0] -eq 1) {
 
 if ($args[1] -eq 1) {
   $arm64 = "-arm64"
+  $rwin = "warm64"
   $zip = "winarm64.zip"
 }
 else {
+  $rwin = "win64"
   $zip = "win64.zip"
 }
 
@@ -41,12 +43,14 @@ echo ("ver = " + $ver)
 echo ("args = " + $args)
 echo ("rnum = " + $rnum)
 echo ("rver = " + $rver)
+echo ("rwin = " + $rwin)
 echo ("rel = " + $rel)
 echo ("zip = " + $zip)
 
 Copy-Item -Path aio\* -Destination . -Recurse
 
 $ini = "install.nsi"
+((Get-Content -path $ini -Raw) -replace 'VVV',$rwin) | Set-Content -path $ini
 ((Get-Content -path $ini -Raw) -replace 'XXX',$rnum) | Set-Content -path $ini
 ((Get-Content -path $ini -Raw) -replace 'YYY',$rver) | Set-Content -path $ini
 ((Get-Content -path $ini -Raw) -replace 'ZZZ',$slim) | Set-Content -path $ini
@@ -62,7 +66,7 @@ mkdir resources\je
 
 cd temp
 $url = ("www.jsoftware.com/download/" + $rel)
-mv ..\win64.zip .
+mv ..\$zip .
 #Invoke-WebRequest -UseBasicParsing ($url + "/install/" + $zip) -outfile $zip
 Invoke-WebRequest -UseBasicParsing ($url + "/qtide/" + $jqt) -outfile $jqt
 Invoke-WebRequest -UseBasicParsing ($url + "/qtlib/" + $qtl) -outfile $qtl

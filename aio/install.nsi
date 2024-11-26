@@ -1,6 +1,7 @@
 # 27 Jan 2023 09:24
 
 # substition examples:
+# 3V "win64" or "warm64"
 # 3X 9.4
 # 3Y 9.4.1
 # 3Z "" or "_slim"
@@ -68,7 +69,8 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-Outfile jXXX_win64ZZZ.exe
+# Outfile jXXX_win64ZZZ.exe
+Outfile jXXX_VVVZZZ.exe
 InstallDir "$(^Name)"
 CRCCheck on
 XPStyle on
