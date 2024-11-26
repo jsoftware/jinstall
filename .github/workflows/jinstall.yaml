@@ -196,7 +196,6 @@ jobs:
 
 # webhook --------------------------------------------------------------
  webhook:
-  if: ${{ false }}
   name: Run Webhook
   runs-on: ubuntu-latest
   needs: [winaio, winaios, winarmaios]
