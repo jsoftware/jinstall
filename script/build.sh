@@ -97,7 +97,7 @@ wget $E/raspberry/j32/libj.so
 wget $E/raspberry/j32/libgmp.so
 chmod +x jconsole
 cd ../tools/regex
-#wget $RX/raspberry/j32/libjpcre2.so
+wget $RX/linux/arm/libjpcre2.so
 cd $W/..
 maketar raspi32
 
@@ -113,7 +113,7 @@ wget $E/raspberry/j64/libj.so
 wget $E/raspberry/j64/libgmp.so
 chmod +x jconsole
 cd ../tools/regex
-#wget $RX/raspberry/j64/libjpcre2.so
+wget $RX/linux/arm/libjpcre2.so
 cd $W/..
 maketar raspi64
 
