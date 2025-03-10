@@ -2,11 +2,8 @@ name: Install
 
 on:
  push:
-  branches: [ master ]
+  branches: [ 9.6 ]
  workflow_dispatch:
-
-# remove the following line to run
-# if: false
 
 jobs:
 
