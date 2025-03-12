@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# write revision.txt as full revision name, e.g. 9.6.0-beta1
+# write revision.txt as full revision name, e.g. 9.7.0-beta1
 
 echo "getrevision arg = $1"
 

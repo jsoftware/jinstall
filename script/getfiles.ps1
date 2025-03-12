@@ -6,7 +6,7 @@
 
 echo "getfiles $args = " + $args
 
-# e.g. 9.6.0-beta1
+# e.g. 9.7.0-beta1
 $ver = Get-Content -Path "revision.txt" -Raw
 
 # get major, minor, revision numbers:

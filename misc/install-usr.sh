@@ -21,14 +21,14 @@ else
 fi
 
 cd ..
-[ "j9.6" = ${PWD##*/} ] || { echo "directory not j9.6" ; exit 1; }
+[ "j9.7" = ${PWD##*/} ] || { echo "directory not j9.7" ; exit 1; }
 cd -
 
 [ "Darwin" = "$(uname)" ] || [ "$(id -u)" = "0" ] || { echo "need sudo" ; exit 1; }
 
 if [ "Darwin" = "$(uname)" ]; then
 EXT=dylib
-VEXT=9.6.dylib  # libj
+VEXT=9.7.dylib  # libj
 GJEXT=dylib     # libjgmp
 if [ "aarch64" = "$cpu" ]; then
  BIN=/opt/homebrew/bin
@@ -43,7 +43,7 @@ else
 fi
 else
 EXT=so
-VEXT=so.9.6    # libj
+VEXT=so.9.7    # libj
 GJEXT=so       # libjgmp
 if [ "Linux" = "$(uname)" ]; then
 # Linux Raspberry
@@ -78,43 +78,43 @@ LIB=/usr/local/lib
 fi
 
 fi
-mkdir -p $SHR/j/9.6/addons/ide || { echo "can not create addon ide directory" ; exit 1; }
-mkdir -p $SHR/j/9.6/addons/dev || { echo "can not create addon dev directory" ; exit 1; }
+mkdir -p $SHR/j/9.7/addons/ide || { echo "can not create addon ide directory" ; exit 1; }
+mkdir -p $SHR/j/9.7/addons/dev || { echo "can not create addon dev directory" ; exit 1; }
 chmod 755 $SHR/j || { echo "can not set permission" ; exit 1; }
-mkdir -p $ETC/j/9.6 || { echo "can not create directory" ; exit 1; }
+mkdir -p $ETC/j/9.7 || { echo "can not create directory" ; exit 1; }
 chmod 755 $ETC/j || { echo "can not set permission" ; exit 1; }
-rm -rf $SHR/j/9.6/system
-cp -r ../system $SHR/j/9.6/.
-rm -rf $SHR/j/9.6/tools
-cp -r ../tools $SHR/j/9.6/.
-rm -rf $SHR/j/9.6/icons
-cp -r icons $SHR/j/9.6/.
-rm -rf $SHR/j/9.6/addons/ide/jhs
-cp -r ../addons/ide/jhs $SHR/j/9.6/addons/ide/. || true
-rm -rf $SHR/j/9.6/addons/dev/eformat
-cp -r ../addons/dev/eformat $SHR/j/9.6/addons/dev/. || true
-find $SHR/j/9.6 -type d -exec chmod a+rx {} \+
-find $SHR/j/9.6 -type f -exec chmod a+r {} \+
-cp profile.ijs $ETC/j/9.6/.
-cp profilex_template.ijs $ETC/j/9.6/.
-find $ETC/j/9.6 -type d -exec chmod a+rx {} \+
-find $ETC/j/9.6 -type f -exec chmod a+r {} \+
+rm -rf $SHR/j/9.7/system
+cp -r ../system $SHR/j/9.7/.
+rm -rf $SHR/j/9.7/tools
+cp -r ../tools $SHR/j/9.7/.
+rm -rf $SHR/j/9.7/icons
+cp -r icons $SHR/j/9.7/.
+rm -rf $SHR/j/9.7/addons/ide/jhs
+cp -r ../addons/ide/jhs $SHR/j/9.7/addons/ide/. || true
+rm -rf $SHR/j/9.7/addons/dev/eformat
+cp -r ../addons/dev/eformat $SHR/j/9.7/addons/dev/. || true
+find $SHR/j/9.7 -type d -exec chmod a+rx {} \+
+find $SHR/j/9.7 -type f -exec chmod a+r {} \+
+cp profile.ijs $ETC/j/9.7/.
+cp profilex_template.ijs $ETC/j/9.7/.
+find $ETC/j/9.7 -type d -exec chmod a+rx {} \+
+find $ETC/j/9.7 -type f -exec chmod a+r {} \+
 echo "#!/bin/sh" > ijconsole.sh
 echo "cd ~ && $BIN/ijconsole \"$@\"" >> ijconsole.sh
 mv ijconsole.sh $BIN/.
 chmod 755 $BIN/ijconsole.sh
-if [ -f "$BIN/ijconsole-9.6" ] ; then
-mv "$BIN/ijconsole-9.6" /tmp/ijconsole-9.6.old.$$
+if [ -f "$BIN/ijconsole-9.7" ] ; then
+mv "$BIN/ijconsole-9.7" /tmp/ijconsole-9.7.old.$$
 fi
-cp jconsole $BIN/ijconsole-9.6
-chmod 755 $BIN/ijconsole-9.6
+cp jconsole $BIN/ijconsole-9.7
+chmod 755 $BIN/ijconsole-9.7
 if [ -f "$BIN/ijconsole" ] ; then
 mv "$BIN/ijconsole" /tmp/ijconsole.old.$$
 fi
 if [ "Linux" = "$(uname)" ]; then
-update-alternatives --install $BIN/ijconsole ijconsole $BIN/ijconsole-9.6 906 || (cd $BIN && ln -sf ijconsole-9.6 ijconsole)
+update-alternatives --install $BIN/ijconsole ijconsole $BIN/ijconsole-9.7 906 || (cd $BIN && ln -sf ijconsole-9.7 ijconsole)
 else
-(cd $BIN && ln -sf ijconsole-9.6 ijconsole)
+(cd $BIN && ln -sf ijconsole-9.7 ijconsole)
 fi
 
 if [ -d "$LIB" ] ; then

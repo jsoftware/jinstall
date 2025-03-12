@@ -2,7 +2,7 @@
 
 P=`pwd`
 
-# get release in form j9.6:
+# get release in form j9.7:
 read -r V < release.txt
 V=j$V
 
