@@ -21,7 +21,7 @@ else
 fi
 
 cd ..
-[ "j9.7" = ${PWD##*/} ] || { echo "directory not j9.7" ; exit 1; }
+[ "j9.7" = ${PWD##*/} ] || [ "jlibrary" = ${PWD##*/} ] || { echo "directory not j9.7" ; exit 1; }
 cd -
 
 [ "Darwin" = "$(uname)" ] || [ "$(id -u)" = "0" ] || { echo "need sudo" ; exit 1; }
@@ -112,7 +112,7 @@ if [ -f "$BIN/ijconsole" ] ; then
 mv "$BIN/ijconsole" /tmp/ijconsole.old.$$
 fi
 if [ "Linux" = "$(uname)" ]; then
-update-alternatives --install $BIN/ijconsole ijconsole $BIN/ijconsole-9.7 906 || (cd $BIN && ln -sf ijconsole-9.7 ijconsole)
+update-alternatives --install $BIN/ijconsole ijconsole $BIN/ijconsole-9.7 907 || (cd $BIN && ln -sf ijconsole-9.7 ijconsole)
 else
 (cd $BIN && ln -sf ijconsole-9.7 ijconsole)
 fi
