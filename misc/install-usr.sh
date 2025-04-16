@@ -30,6 +30,7 @@ if [ "Darwin" = "$(uname)" ]; then
 EXT=dylib
 VEXT=9.7.dylib  # libj
 GJEXT=dylib     # libjgmp
+GJEXT10=dylib   # libjgmp
 if [ "aarch64" = "$cpu" ]; then
  BIN=/opt/homebrew/bin
  ETC=/opt/homebrew/etc
@@ -46,6 +47,7 @@ EXT=so
 VEXT=so.9.7    # libj
 GJEXT=so       # libjgmp
 if [ "Linux" = "$(uname)" ]; then
+GJEXT10=so.10     # libjgmp
 # Linux Raspberry
 BIN=/usr/bin
 ETC=/etc
@@ -71,6 +73,7 @@ else
 fi
 else
 # OpenBSD FreeBSD
+GJEXT10=so.11.0   # libjgmp
 BIN=/usr/local/bin
 ETC=/usr/local/etc
 SHR=/usr/local/share
@@ -123,11 +126,13 @@ mv -f "$LIB/libj.$VEXT" /tmp/libj.$VEXT.old.$$
 fi
 cp libj.$EXT "$LIB/libj.$VEXT"
 chmod 755 "$LIB/libj.$VEXT"
+if [ ! -f "$LIB/libgmp.$GJEXT10" ] ; then
 if [ -f "$LIB/libjgmp.$GJEXT" ] ; then
 mv -f "$LIB/libjgmp.$GJEXT" /tmp/libjgmp.$GJEXT.old.$$
 fi
 cp libgmp.$GJEXT "$LIB/libjgmp.$GJEXT"
 chmod 755 "$LIB/libjgmp.$GJEXT"
+fi
 fi
 
 if [ "Darwin" != "$(uname)" ]; then
