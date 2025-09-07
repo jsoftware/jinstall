@@ -12,6 +12,7 @@ jobs:
 
 # install --------------------------------------------------------------
  install:
+  if: false
   name: Installers
   runs-on: ubuntu-latest
   steps:
@@ -36,10 +37,12 @@ jobs:
  unixaio:
   name: UnixAIO
   runs-on: ubuntu-latest
-  needs: install
+  #needs: install
   steps:
    - name: Get files
      run: |
+      ls -l
+      script/test.sh
       script/build_unix_aio.sh
 
    - name: Get build list
@@ -63,6 +66,7 @@ jobs:
 
 # windows AIO ----------------------------------------------------------
  winaio:
+  if: false
   name: WinAIO
   runs-on: windows-latest
   needs: install
@@ -117,6 +121,7 @@ jobs:
 
 # windows slim AIO -----------------------------------------------------
  winaios:
+  if: false
   name: WinAIOslim
   runs-on: windows-latest
   needs: install
@@ -171,6 +176,7 @@ jobs:
 
 # windows arm slim AIO -----------------------------------------------------
  winarmaios:
+  if: false
   name: WinarmAIOslim
   runs-on: windows-latest
   needs: install
@@ -225,6 +231,7 @@ jobs:
 
 # webhook --------------------------------------------------------------
  webhook:
+  if: false
   name: Run Webhook
   runs-on: ubuntu-latest
   needs: [unixaio, winaio, winaios, winarmaios]
