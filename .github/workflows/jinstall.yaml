@@ -39,8 +39,11 @@ jobs:
   runs-on: ubuntu-latest
   #needs: install
   steps:
-   - name: Get dir
-     run: ls -l
+   - name: Checkout Git repository
+     uses: actions/checkout@v4
+     env:
+        password: ${{ secrets.PASSWORD }}
+        url: https://github.com/${{github.repository}}
 
    - name: Get files
      run: script/build_unix_aio.sh
