@@ -94,7 +94,7 @@ jobs:
      run: script\getfiles.ps1 0 0
 
    - name: Build AIO
-     uses: joncloud/makensis-action@v4
+     uses: joncloud/makensis-action@v4.1
 
    - name: Rename build
      shell: pwsh
@@ -111,7 +111,7 @@ jobs:
 
 # windows slim AIO -----------------------------------------------------
  winaios:
-  if: false
+  #if: false
   name: WinAIOslim
   runs-on: windows-latest
   needs: install
@@ -146,7 +146,7 @@ jobs:
      run: script\getfiles.ps1 1 0
 
    - name: Build AIO
-     uses: joncloud/makensis-action@v4
+     uses: joncloud/makensis-action@v4.1
 
    - name: Rename build
      shell: pwsh
@@ -198,7 +198,7 @@ jobs:
      run: script\getfiles.ps1 1 1
 
    - name: Build AIO
-     uses: joncloud/makensis-action@v4
+     uses: joncloud/makensis-action@v4.1
 
    - name: Rename build
      shell: pwsh

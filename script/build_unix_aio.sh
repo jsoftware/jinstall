@@ -8,9 +8,9 @@ read -r V < release.txt
 V=j$V
 echo $V
 
-script/getrevision.sh $V
-read -r R < revision.txt
-R=j$R
+#script/getrevision.sh $V
+#read -r R < revision.txt
+#R=j$R
 
 D=https://www.jsoftware.com/download/$V
 
@@ -39,7 +39,7 @@ mv ../Qt .
 cd bin
 unzip  ../../$I
 cd ../..
-id="$W/${R}_mac64_AIO.zip"
+id="$W/mac64_AIO.zip"
 buildlist+="${id},"
 echo $id >> buildlist.txt
 zip -9ry $id $V
@@ -56,7 +56,7 @@ mv ../Qt .
 cd bin
 unzip -xvf ../../$I
 cd ../..
-id="$W/${R}_mac64_AIO_slim.tar.gz"
+id="$W/mac64_AIO_slim.zip"
 buildlist+="${id},"
 zip -9ry $id $V
 
@@ -76,7 +76,7 @@ mv ../Qt .
 cd bin
 tar -xvf ../../$I
 cd ../..
-id="$W/${R}_linux64_AIO.tar.gz"
+id="$W/linux64_AIO.tar.gz"
 buildlist+="${id},"
 tar -cvf - $V | gzip -9 - > $id
 
@@ -92,7 +92,7 @@ mv ../Qt .
 cd bin
 tar -xvf ../../$I
 cd ../..
-id="$W/${R}_linux64_AIO_slim.tar.gz"
+id="$W/linux64_AIO_slim.tar.gz"
 buildlist+="${id}"
 tar -cvf - $V | gzip -9 - > $id
 
