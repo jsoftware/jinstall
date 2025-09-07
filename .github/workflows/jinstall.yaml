@@ -41,22 +41,12 @@ jobs:
   steps:
    - name: Checkout Git repository
      uses: actions/checkout@v4
-     env:
-        password: ${{ secrets.PASSWORD }}
-        url: https://github.com/${{github.repository}}
 
    - name: Get files
      run: script/build_unix_aio.sh
 
-   - name: Get build list
-     uses: dsaltares/fetch-gh-release-asset@master
-     with:
-      file: 'buildlist.txt'
-      target: 'buildlist.txt'
-      token: ${{ secrets.GITHUB_TOKEN }}
-
    - name: read build list
-     run: echo "buildlist=$(cat buildlist.txt" >> $GITHUB_ENV
+     run: echo "buildlist=$(cat buildlist.txt)" >> $GITHUB_ENV
 
    - name: Release UnixAIO
      uses: ncipollo/release-action@v1
@@ -76,9 +66,6 @@ jobs:
   steps:
    - name: Checkout Git repository
      uses: actions/checkout@v4
-     env:
-        password: ${{ secrets.PASSWORD }}
-        url: https://github.com/${{github.repository}}
 
    - name: Get revision
      uses: dsaltares/fetch-gh-release-asset@master
@@ -131,9 +118,6 @@ jobs:
   steps:
    - name: Checkout Git repository
      uses: actions/checkout@v4
-     env:
-        password: ${{ secrets.PASSWORD }}
-        url: https://github.com/${{github.repository}}
 
    - name: Get revision
      uses: dsaltares/fetch-gh-release-asset@master
@@ -186,9 +170,6 @@ jobs:
   steps:
    - name: Checkout Git repository
      uses: actions/checkout@v4
-     env:
-        password: ${{ secrets.PASSWORD }}
-        url: https://github.com/${{github.repository}}
 
    - name: Get revision
      uses: dsaltares/fetch-gh-release-asset@master
