@@ -1,6 +1,6 @@
 Copyright / Warranty / License
 
-J Products are Copyright 1994-2024 by Jsoftware Inc. All rights reserved.
+J Products are Copyright 1994-2025 by Jsoftware Inc. All rights reserved.
 
 Warranty and License Agreement
 
