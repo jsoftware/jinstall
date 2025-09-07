@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # get release in form j9.7:
-echo `pwd`
+S=`pwd`
+echo $S
+
 read -r V < release.txt
 V=j$V
 echo $V
@@ -94,6 +96,9 @@ id="$W/${R}_linux64_AIO_slim.tar.gz"
 buildlist+="${id}"
 tar -cvf - $V | gzip -9 - > $id
 
+# finish ---------------------------------------------------------------
+cd $S
+cp $W/* .
 echo $buildlist > buildlist.txt
-
 cat buildlist.txt
+ls -l
