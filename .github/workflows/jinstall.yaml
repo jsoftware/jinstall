@@ -60,7 +60,7 @@ jobs:
 
 # windows AIO ----------------------------------------------------------
  winaio:
-  #if: false
+  if: false
   name: WinAIO
   runs-on: windows-2022
   needs: install
@@ -112,7 +112,7 @@ jobs:
 
 # windows slim AIO -----------------------------------------------------
  winaios:
-  #if: false
+  if: false
   name: WinAIOslim
   runs-on: windows-2022
   needs: install
@@ -164,7 +164,7 @@ jobs:
 
 # windows arm slim AIO -----------------------------------------------------
  winarmaios:
-  #if: false
+  if: false
   name: WinarmAIOslim
   runs-on: windows-2022
   needs: install
