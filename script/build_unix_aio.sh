@@ -43,7 +43,6 @@ f() {
  cd ../..
  id="$W/mac64_AIO${t}.zip"
  buildlist+="${id},"
- echo $id >> buildlist.txt
  zip -9ry $id $V
 }
 
@@ -71,7 +70,7 @@ cd bin
 tar -xvf ../../$I
 cd ../..
 id="$W/linux64_AIO${t}.tar.gz"
-buildlist+="${id}"
+buildlist+="${id},"
 tar -cvf - $V | gzip -9 - > $id
 }
 
@@ -81,6 +80,6 @@ f "slim"
 # finish ---------------------------------------------------------------
 cd $S
 cp $W/* .
-echo $buildlist > buildlist.txt
+echo "${buildlist::-1}" > buildlist.txt
 cat buildlist.txt
 ls -l
