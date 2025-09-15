@@ -25,6 +25,9 @@ f() {
  if [[ "slim" = "$1" ]]; then
    s="-slim";
    t="_slim";
+ else
+   s="";
+   t="";
  fi
  rm -rf $T/*
  cd $T
@@ -56,6 +59,9 @@ f() {
  if [[ "slim" = "$1" ]]; then
    s="-slim";
    t="_slim";
+ else
+   s="";
+   t="";
  fi
  rm -rf $T/*
  cd $T
