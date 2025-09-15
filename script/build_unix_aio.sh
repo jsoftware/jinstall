@@ -34,12 +34,12 @@ f() {
  wget $D/install/$F
  wget $D/qtide/$I
  wget $D/qtlib/$L
- unzip $F
- unzip $L
+ unzip -q $F
+ unzip -q $L
  cd $V
  mv ../Qt .
  cd bin
- unzip  ../../$I
+ unzip -q  ../../$I
  cd ../..
  id="$W/mac64_AIO${t}.zip"
  buildlist+="${id},"
@@ -49,29 +49,33 @@ f() {
 f ""
 f "slim"
 
+echo "after mac builds: $buildlist"
+
 # linux ----------------------------------------------------------------
-f () {
+f() {
  if [[ "slim" = "$1" ]]; then
    s="-slim";
    t="_slim";
  fi
-rm -rf $T/$V/*
-I=jqt-linux${s}.tar.gz
-L=qt68-linux${s}.tar.gz
-wget $D/install/$F
-wget $D/qtide/$I
-wget $D/qtlib/$L
-tar -xvf $F
-tar -xvf $L
-cd $V
-rm -rf Qt
-mv ../Qt .
-cd bin
-tar -xvf ../../$I
-cd ../..
-id="$W/linux64_AIO${t}.tar.gz"
-buildlist+="${id},"
-tar -cvf - $V | gzip -9 - > $id
+ rm -rf $T/$V/*
+ cd $T
+ F=${V}_linux64.zip
+ I=jqt-linux${s}.tar.gz
+ L=qt68-linux${s}.tar.gz
+ wget $D/install/$F
+ wget $D/qtide/$I
+ wget $D/qtlib/$L
+ tar -xf $F
+ tar -xf $L
+ cd $V
+ rm -rf Qt
+ mv ../Qt .
+ cd bin
+ tar -xf ../../$I
+ cd ../..
+ id="$W/linux64_AIO${t}.tar.gz"
+ buildlist+="${id},"
+ tar -cf - $V | gzip -9 - > $id
 }
 
 f ""
