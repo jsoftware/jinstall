@@ -80,6 +80,7 @@ f "slim"
 # finish ---------------------------------------------------------------
 cd $S
 cp $W/* .
-echo "${buildlist::-1}" > buildlist.txt
+buildlist="${buildlist::-1}"
+echo $buildlist > buildlist.txt
 cat buildlist.txt
 ls -l
