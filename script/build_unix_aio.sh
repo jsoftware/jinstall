@@ -26,14 +26,14 @@ f() {
    s="-slim";
    t="_slim";
  fi
- rm -rf $T/$V/*
+ rm -rf $T/*
  cd $T
  F=${V}_mac64.zip
  I=jqt-mac${s}.zip
  L=qt68-mac${s}.zip
- wget $D/install/$F
- wget $D/qtide/$I
- wget $D/qtlib/$L
+ wget -q $D/install/$F
+ wget -q $D/qtide/$I
+ wget -q $D/qtlib/$L
  unzip -q $F
  unzip -q $L
  cd $V
@@ -57,14 +57,14 @@ f() {
    s="-slim";
    t="_slim";
  fi
- rm -rf $T/$V/*
+ rm -rf $T/*
  cd $T
- F=${V}_linux64.zip
+ F=${V}_linux64.tar.gz
  I=jqt-linux${s}.tar.gz
  L=qt68-linux${s}.tar.gz
- wget $D/install/$F
- wget $D/qtide/$I
- wget $D/qtlib/$L
+ wget -q $D/install/$F
+ wget -q $D/qtide/$I
+ wget -q $D/qtlib/$L
  tar -xf $F
  tar -xf $L
  cd $V
