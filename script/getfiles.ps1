@@ -38,7 +38,7 @@ else {
 $zip = ($rwin + ".zip")
 
 $jqt = ("jqt-win" + $arm64 + $slim + ".zip")
-$qtl = ("qt68-win" + $arm64 + $slim + ".zip")
+$qtl = ("qt610-win" + $arm64 + $slim + ".zip")
 
 echo ("ver = " + $ver)
 echo ("args = " + $args)

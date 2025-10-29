@@ -33,7 +33,7 @@ f() {
  cd $T
  F=${V}_mac64.zip
  I=jqt-mac${s}.zip
- L=qt68-mac${s}.zip
+ L=qt610-mac${s}.zip
  wget -q $D/install/$F
  wget -q $D/qtide/$I
  wget -q $D/qtlib/$L
@@ -67,7 +67,7 @@ f() {
  cd $T
  F=${V}_linux64.tar.gz
  I=jqt-linux${s}.tar.gz
- L=qt68-linux${s}.tar.gz
+ L=qt610-linux${s}.tar.gz
  wget -q $D/install/$F
  wget -q $D/qtide/$I
  wget -q $D/qtlib/$L
