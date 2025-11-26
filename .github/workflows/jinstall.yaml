@@ -115,7 +115,7 @@ jobs:
   #if: false
   name: WinAIOslim
   runs-on: windows-2022
-  needs: install
+  # needs: install
   steps:
    - name: Checkout Git repository
      uses: actions/checkout@v4
