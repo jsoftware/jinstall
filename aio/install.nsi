@@ -99,7 +99,7 @@ Section -Main SEC0000
     CreateDirectory "$SMPROGRAMS\$StartMenuGroup"
     SetOutPath $PROFILE
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\JXXX.lnk" "$INSTDIR\bin\jqt.exe" "" "$INSTDIR\bin\icons\jgreen.ico" 0
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\JHSXXX.lnk" "$INSTDIR\bin\jconsole.exe ~addons/ide/jhs/config/jhs.cfg" "" "$INSTDIR\bin\icons\jblue.ico" 0
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\JHSXXX.lnk" "$INSTDIR\bin\jconsole.exe ~addons\/ide\/jhs\/config\/jhs.cfg" "" "$INSTDIR\bin\icons\jblue.ico" 0
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\JBreakXXX.lnk" "$INSTDIR\bin\jbreak.bat" "" "$INSTDIR\bin\icons\jyellow.ico" 0
 #    CreateShortcut "$DESKTOP\JXXX.lnk" "$INSTDIR\bin\jqt.exe"
     WriteRegStr SHCTX "${REGKEY}\Components" Main 1
