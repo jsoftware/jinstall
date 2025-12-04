@@ -34,8 +34,9 @@ jobs:
       replacesArtifacts: true
 
 # unix AIO -------------------------------------------------------------
+# not needed from Dec 2025
  unixaio:
-  #if: false
+  if: false
   name: UnixAIO
   runs-on: ubuntu-latest
   needs: install
@@ -271,7 +272,7 @@ jobs:
   #if: false
   name: Run Webhook
   runs-on: ubuntu-latest
-  needs: [unixaio, winaio, winaios, winarmaio, winarmaios]
+  needs: [winaio, winaios, winarmaio, winarmaios]
   steps:
    - name: distribution
      uses: distributhor/workflow-webhook@v2
