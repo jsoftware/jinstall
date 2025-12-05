@@ -1,0 +1,44 @@
+name: installdev
+
+# for testing linux/mac install script
+
+on:
+ push:
+  branches: [ master ]
+ workflow_dispatch:
+
+jobs:
+
+# install --------------------------------------------------------------
+ install:
+  name: unix
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout Git repository
+     uses: actions/checkout@v4
+
+   - name: Build
+     run: script/makejinstall.sh
+
+   - name: Release
+     uses: ncipollo/release-action@v1
+     with:
+      tag: build
+      artifacts: "j9.7_linux64_install.tar.gz,j9.7_mac64_install.zip"
+      token: ${{ secrets.GITHUB_TOKEN }}
+      allowUpdates: true
+      replacesArtifacts: true
+
+# webhook --------------------------------------------------------------
+ webhook:
+  #if: false
+  name: Run Webhook
+  runs-on: ubuntu-latest
+  needs: [install]
+  steps:
+   - name: distribution
+     uses: distributhor/workflow-webhook@v2
+     env:
+      webhook_url: ${{ secrets.WEBHOOK_URL }}
+      webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+      data: '{ "id": "jinstall" }'

@@ -6,7 +6,7 @@ on:
  workflow_dispatch:
 
 # remove the following line to run
-# if: false
+if: false
 
 jobs:
 
