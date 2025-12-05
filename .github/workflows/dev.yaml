@@ -1,4 +1,4 @@
-name: installdev
+name: Install
 
 # for testing linux/mac install script
 
@@ -24,7 +24,7 @@ jobs:
      uses: ncipollo/release-action@v1
      with:
       tag: build
-      artifacts: "j9.7_linux64_install.tar.gz,j9.7_mac64_install.zip"
+      artifacts: "linux64_install.tar.gz,mac64_install.zip"
       token: ${{ secrets.GITHUB_TOKEN }}
       allowUpdates: true
       replacesArtifacts: true
