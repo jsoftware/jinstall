@@ -27,7 +27,8 @@ Options:
 
 Give other parameters in order, use "" or empty for the default
 
-[Dir] - installation directory, default $HOME/$V
+[Dir] - installation top level directory, default $HOME.
+        The installation is to a $V subdirectory of this.
 [Jqt] - Jqt installed, one of none|slim|full (default full)
 [Addons] - Addons installed, one of none|all (default none)
 
@@ -81,9 +82,10 @@ case "$A" in
  *) echo "Invalid Addons selection: $A"; exit 1 ;;
 esac
 
-# resolve directory path and add J version
+# resolve directory path
 mkdir -p $D
-D="$(cd -P "$D" && pwd -P)/$V"
+cd $D
+D=`pwd`
 
 # ----------------------------------------------------------------------
 # install message + prompt to continue
@@ -112,8 +114,6 @@ if [ "$FORCE" = 0 ]; then
  esac
 fi
 
-exit 0
-
 M=$(mktemp -d -t 'jtemp.XXXXXX')
 cd $M
 
@@ -129,9 +129,9 @@ else
  tar -xf $W
 fi
 
-cd -
-cp -r $M/$V/* $D
-cd $D
+mkdir -p $D/$V
+cp -r $M/$V/* $D/$V
+cd $D/$V
 rm -rf $M
 
 bin/jconsole -js "install 'system $P $A'"
