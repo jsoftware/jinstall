@@ -2,7 +2,8 @@ name: Install
 
 on:
  push:
-  branches: [ master ]
+  branches:
+   - Xmaster
  workflow_dispatch:
 
 # remove the following line to run
