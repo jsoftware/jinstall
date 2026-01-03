@@ -20,9 +20,10 @@ else
  exit 1
 fi
 
+P=`pwd`
 cd ..
 [ "j9.7" = ${PWD##*/} ] || [ "jlibrary" = ${PWD##*/} ] || { echo "directory not j9.7" ; exit 1; }
-cd -
+cd "$P"
 
 [ "Darwin" = "$(uname)" ] || [ "$(id -u)" = "0" ] || { echo "need sudo" ; exit 1; }
 
