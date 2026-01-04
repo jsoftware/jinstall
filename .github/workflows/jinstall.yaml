@@ -2,12 +2,11 @@ name: Install
 
 on:
  push:
-  branches:
-   - Xmaster
+  branches: [ master ]
  workflow_dispatch:
 
 # remove the following line to run
-if: false
+# if: false
 
 jobs:
 
@@ -34,28 +33,22 @@ jobs:
       allowUpdates: true
       replacesArtifacts: true
 
-# unix AIO -------------------------------------------------------------
-# not needed from Dec 2025
- unixaio:
-  if: false
-  name: UnixAIO
+# script installers ------------------------------------------------------
+ script:
+  name: install scripts
   runs-on: ubuntu-latest
-  needs: install
   steps:
    - name: Checkout Git repository
      uses: actions/checkout@v4
 
-   - name: Get files
-     run: script/build_unix_aio.sh
+   - name: Build
+     run: script/makejinstall.sh
 
-   - name: read build list
-     run: echo "buildlist=$(cat buildlist.txt)" >> $GITHUB_ENV
-
-   - name: Release UnixAIO
+   - name: Release
      uses: ncipollo/release-action@v1
      with:
       tag: build
-      artifacts: ${{ env.buildlist }}
+      artifacts: "linux64_install.tar.gz,mac64_install.zip"
       token: ${{ secrets.GITHUB_TOKEN }}
       allowUpdates: true
       replacesArtifacts: true
@@ -273,7 +266,7 @@ jobs:
   #if: false
   name: Run Webhook
   runs-on: ubuntu-latest
-  needs: [winaio, winaios, winarmaio, winarmaios]
+  needs: [script, winaio, winaios, winarmaio, winarmaios]
   steps:
    - name: distribution
      uses: distributhor/workflow-webhook@v2
