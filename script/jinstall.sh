@@ -86,18 +86,18 @@ esac
 
 # ----------------------------------------------------------------------
 # check user/path/OS combo
-UID=`id -u`
+UID1=`id -u`
 if [ "$D" = "/usr" ]; then
  if [ "$OS" = "Darwin" ]; then
   printf "This script does not support install to /usr in macOS\n"
   exit 1
  fi
- if [ ! $UID = 0 ]; then
+ if [ ! $UID1 = 0 ]; then
   printf "Run this script as root to install under /usr\n"
   exit 1
  fi
 else
- if [ $UID = 0 ]; then
+ if [ $UID1 = 0 ]; then
   printf "You are running this script as root. OK to continue? (y/N) "
   read response
   case "${response:-N}" in
