@@ -40,6 +40,11 @@ g() {
   tar xvf $F
 }
 
+for f in dictionary; do
+  T=`sed -n -e "/^data\/${f}/p" addons.txt`
+  g "$T"
+done
+
 for f in eformat fold lu modular; do
   T=`sed -n -e "/^dev\/${f}/p" addons.txt`
   g "$T"

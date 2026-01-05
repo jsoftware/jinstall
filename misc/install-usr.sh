@@ -83,6 +83,7 @@ fi
 
 fi
 mkdir -p $SHR/j/9.7/addons/ide || { echo "can not create addon ide directory" ; exit 1; }
+mkdir -p $SHR/j/9.7/addons/data || { echo "can not create addon data directory" ; exit 1; }
 mkdir -p $SHR/j/9.7/addons/dev || { echo "can not create addon dev directory" ; exit 1; }
 chmod 755 $SHR/j || { echo "can not set permission" ; exit 1; }
 mkdir -p $ETC/j/9.7 || { echo "can not create directory" ; exit 1; }
@@ -95,6 +96,8 @@ rm -rf $SHR/j/9.7/icons
 cp -r icons $SHR/j/9.7/.
 rm -rf $SHR/j/9.7/addons/ide/jhs
 cp -r ../addons/ide/jhs $SHR/j/9.7/addons/ide/. || true
+rm -rf $SHR/j/9.7/addons/data/dictionary
+cp -r ../addons/data/dictionary $SHR/j/9.7/addons/data/. || true
 rm -rf $SHR/j/9.7/addons/dev/eformat
 cp -r ../addons/dev/eformat $SHR/j/9.7/addons/dev/. || true
 find $SHR/j/9.7 -type d -exec chmod a+rx {} \+
