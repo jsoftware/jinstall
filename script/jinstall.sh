@@ -23,6 +23,7 @@ Usage: $(basename "$0") [OPTIONS] [Dir] [Jqt] [Addons]
 
 Options:
     -h, --help          Show this help and exit
+    -d, --default       install with default parameters (home/full/all)
     -f, --force         Force operation (no prompts)
 
 Give other parameters in order, use "" or empty for the default
@@ -31,26 +32,37 @@ Give other parameters in order, use "" or empty for the default
         The installation is to a $V subdirectory of this.
         In Linux, a directory of /usr makes a standard system install
 [Jqt] - Jqt installed, one of none|slim|full (default full)
-[Addons] - Addons installed, one of none|all (default none)
+[Addons] - Addons installed, one of none|all (default all)
 
 Examples:
-$(basename "$0")                 # install full Jqt system under home with no addons
-$(basename "$0") "" slim         # install slim Jqt system under home with no addons
-$(basename "$0") -f mydir none   # install base system only in mydir, no prompts
-$(basename "$0") mydir none all  # install base system in mydir plus all addons
-$(basename "$0") /usr none all   # system base system install on Linux
+$(basename "$0") --default       # install full Jqt system under home with all addons
+$(basename "$0") "" slim none    # install slim Jqt system under home with no addons
+$(basename "$0") -f mydir none none  # install base system only in mydir, no prompts
+$(basename "$0") mydir none      # install base system in mydir with all addons
+$(basename "$0") /usr none none  # system install on Linux, with base system only
 EOF
- exit 0
 }
 
+# ----------------------------------------------------------------------
+if [ $# -eq 0 ]; then
+  usage;
+  printf "\nPress enter to continue "
+  read wait
+  printf "\n"
+  exit 0
+fi
+
+# ----------------------------------------------------------------------
 FORCE=0;
+DEFAULT=0;
 
 # ----------------------------------------------------------------------
 # Parse options
 while [ $# -gt 0 ]; do
  case "$1" in
-  -h|--help)    usage ;;
+  -h|--help)    usage; exit 0 ;;
   -f|--force)   FORCE=1; shift ;;
+  -d|--default) DEFAULT=1; break ;;
   --)           shift; break ;;
   -*)           printf "Unknown option: $1" >&2; usage ;;
   *)            break ;;   # first non-option argument → stop parsing
@@ -59,9 +71,16 @@ done
 
 # ----------------------------------------------------------------------
 # directory, Jqt, Addons parameters
-D=${1:-$HOME}
-P=${2:-"full"}
-A=${3:-"none"}
+
+if [ $DEFAULT = "1" ]; then
+ D=home
+ P=full
+ A=all
+else
+ D=${1:-"home"}
+ P=${2:-"full"}
+ A=${3:-"all"}
+fi
 
 # check likely incorrect directory
 case "$D" in
@@ -70,7 +89,7 @@ case "$D" in
  exit 1 ;;
 esac
 
-if [ "$D" = "home" ]; then D=$HOME; fi
+if [ "$D" = "home" ]; then D="$HOME"; fi
 
 # check Jqt selection
 case "$P" in
