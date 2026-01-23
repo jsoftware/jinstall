@@ -3,7 +3,7 @@
 # parameters
 # install directory
 # Jqt: none/slim/full (default full)
-# Addons: none/all (default none)
+# Addons: none/all (default all)
 
 set -eu
 
