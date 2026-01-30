@@ -46,7 +46,7 @@ EOF
 # ----------------------------------------------------------------------
 if [ $# -eq 0 ]; then
   usage;
-  printf "\nPress enter to continue "
+  printf "\nPress enter to finish "
   read wait
   printf "\n"
   exit 0
