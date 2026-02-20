@@ -48,7 +48,7 @@ jobs:
      uses: ncipollo/release-action@v1
      with:
       tag: build
-      artifacts: "linux64_install.tar.gz,mac64_install.zip"
+      artifacts: "unix.tar.gz"
       token: ${{ secrets.GITHUB_TOKEN }}
       allowUpdates: true
       replacesArtifacts: true
