@@ -10,8 +10,9 @@ set -eu
 V=j9.7
 
 OS=$(uname -s)
-if [ "$OS" != "Darwin" ] && [ "$OS" != "Linux" ]; then
- printf "This script only works for Linux or macOS, not for $OS\n"
+ARCH=$(uname -m)
+if [ "$OS" != "Darwin" ] && [ "$OS" != "Linux" ] && [ "$OS" != "FreeBSD" ] && [ "$OS" != "OpenBSD" ]; then
+ printf "This script only works for Linux macOS FreeBSD or OpenBSD, not for $OS\n"
  exit 1
 fi
 
@@ -150,7 +151,7 @@ else
  m="$m and no Addons"
 fi
 
-printf "$m in $D\n"
+printf "$m in $D/$V\n"
 
 if [ "$FORCE" = 0 ]; then
  printf 'OK to continue? (y/N) '
@@ -172,13 +173,33 @@ if [ "$OS" = "Darwin" ]; then
  curl -OL $S/$W
  unzip $W
 else
- W=${V}_linux64.tar.gz
+ if [ "$OS" = "Linux" ]; then
+  if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ] ; then
+   W=${V}_raspi64.tar.gz
+  elif [ "$ARCH" = "armv6l" ]; then
+   W=${V}_raspi32.tar.gz
+  else
+   W=${V}_linux64.tar.gz
+  fi
+ elif [ "$OS" = "FreeBSD" ]; then
+  if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ] ; then
+   printf "This script only works for x86_64\n" ; exit 1
+  else
+   W=${V}_fbsd64.tar.gz
+  fi
+ elif [ "$OS" = "OpenBSD" ]; then
+  if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ] ; then
+   printf "This script only works for x86_64\n" ; exit 1
+  else
+   W=${V}_obsd64.tar.gz
+  fi
+ fi
  wget $S/$W
  tar -xf $W
 fi
 
 # ----------------------------------------------------------------------
-if [ "$D" = "/usr" ]; then
+if [ "$OS" = "Linux" ] && [ "$D" = "/usr" ]; then
  cd $V
  bin/jconsole -js "install 'system $P $A'"
  if [ -f "/etc/alternatives/ijconsole" ]; then
