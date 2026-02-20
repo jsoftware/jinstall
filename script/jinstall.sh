@@ -169,29 +169,29 @@ cd $M
 S="https://www.jsoftware.com/download/$V/install"
 
 if [ "$OS" = "Darwin" ]; then
- W=${V}_mac64.zip
+ W=${V}_mac.zip
  curl -OL $S/$W
  unzip $W
 else
  if [ "$OS" = "Linux" ]; then
   if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ] ; then
-   W=${V}_raspi64.tar.gz
+   W=${V}_raspi.tar.gz
   elif [ "$ARCH" = "armv6l" ]; then
    W=${V}_raspi32.tar.gz
   else
-   W=${V}_linux64.tar.gz
+   W=${V}_linux.tar.gz
   fi
  elif [ "$OS" = "FreeBSD" ]; then
   if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ] ; then
    printf "This script only works for x86_64\n" ; exit 1
   else
-   W=${V}_fbsd64.tar.gz
+   W=${V}_fbsd.tar.gz
   fi
  elif [ "$OS" = "OpenBSD" ]; then
   if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ] ; then
    printf "This script only works for x86_64\n" ; exit 1
   else
-   W=${V}_obsd64.tar.gz
+   W=${V}_obsd.tar.gz
   fi
  fi
  wget $S/$W
