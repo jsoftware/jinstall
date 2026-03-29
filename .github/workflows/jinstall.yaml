@@ -17,7 +17,7 @@ jobs:
   runs-on: ubuntu-latest
   steps:
    - name: Checkout Git repository
-     uses: actions/checkout@v4
+     uses: actions/checkout@v6
 
    - name: Build
      run: |
@@ -39,7 +39,7 @@ jobs:
   runs-on: ubuntu-latest
   steps:
    - name: Checkout Git repository
-     uses: actions/checkout@v4
+     uses: actions/checkout@v6
 
    - name: Build
      run: script/makejinstall.sh
@@ -61,7 +61,7 @@ jobs:
   needs: install
   steps:
    - name: Checkout Git repository
-     uses: actions/checkout@v4
+     uses: actions/checkout@v6
 
    - name: Get revision
      uses: dsaltares/fetch-gh-release-asset@master
@@ -113,7 +113,7 @@ jobs:
   needs: install
   steps:
    - name: Checkout Git repository
-     uses: actions/checkout@v4
+     uses: actions/checkout@v6
 
    - name: Get revision
      uses: dsaltares/fetch-gh-release-asset@master
@@ -165,7 +165,7 @@ jobs:
   needs: install
   steps:
    - name: Checkout Git repository
-     uses: actions/checkout@v4
+     uses: actions/checkout@v6
 
    - name: Get revision
      uses: dsaltares/fetch-gh-release-asset@master
@@ -217,7 +217,7 @@ jobs:
   needs: install
   steps:
    - name: Checkout Git repository
-     uses: actions/checkout@v4
+     uses: actions/checkout@v6
 
    - name: Get revision
      uses: dsaltares/fetch-gh-release-asset@master
