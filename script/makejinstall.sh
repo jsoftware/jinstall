@@ -1,9 +1,7 @@
+#!/bin/bash
+#
+# just copies the script into the current directory
 
-P=`pwd`
+cp script/jinstall.sh .
 
-cd script
-chmod +x jinstall.sh
-tar -czf ../unix.tar.gz jinstall.sh
-
-cd ..
 ls -alrt

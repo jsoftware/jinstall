@@ -1,9 +1,4 @@
 #!/usr/bin/env sh
-#
-# parameters
-# install directory
-# Jqt: none/slim/full (default full)
-# Addons: none/all (default all)
 
 set -eu
 
@@ -20,73 +15,54 @@ fi
 # Show usage
 usage() {
  cat <<EOF
-Usage: $(basename "$0") [OPTIONS] [Dir] [Jqt] [Addons]
+Usage: $(basename "$0") [OPTIONS]
 
 Options:
-    -h, --help          Show this help and exit
-    -d, --default       install with default parameters (home/full/all)
-    -f, --force         Force operation (no prompts)
-
-Give other parameters in order, use "" or empty for the default
-
-[Dir] - installation top level directory, default $HOME.
-        The installation is to a $V subdirectory of this.
-        In Linux, a directory of /usr makes a standard system install
-[Jqt] - Jqt installed, one of none|slim|full (default full)
-[Addons] - Addons installed, one of none|all (default all)
-
-Examples:
-$(basename "$0") --default       # install full Jqt system under home with all addons
-$(basename "$0") "" slim none    # install slim Jqt system under home with no addons
-$(basename "$0") -f mydir none none  # install base system only in mydir, no prompts
-$(basename "$0") mydir none      # install base system in mydir with all addons
-$(basename "$0") /usr none none  # system install on Linux, with base system only
+  -h --help       Show this help and exit
+  -p --path       installation top level directory, default $HOME.
+                  The installation is to a $V subdirectory of this.
+                  In Linux, a directory of /usr makes a standard system install.
+                  Some paths may require root access.
+  -q --qt         type of Jqt installed, one of [full]|slim|none
+ --no-addons      do not install the full set of addons
+ --no-shortcuts   do not create desktop shortcuts
 EOF
 }
 
 # ----------------------------------------------------------------------
-if [ $# -eq 0 ]; then
-  usage;
-  printf "\nPress enter to finish "
-  read wait
-  printf "\n"
-  exit 0
-fi
-
-# ----------------------------------------------------------------------
-FORCE=0;
-DEFAULT=0;
-
-# ----------------------------------------------------------------------
 # Parse options
-while [ $# -gt 0 ]; do
- case "$1" in
-  -h|--help)    usage; exit 0 ;;
-  -f|--force)   FORCE=1; shift ;;
-  -d|--default) DEFAULT=1; break ;;
-  --)           shift; break ;;
-  -*)           printf "Unknown option: $1" >&2; usage ;;
-  *)            break ;;   # first non-option argument → stop parsing
- esac
+D=$HOME
+P=full
+A=all
+S=true
+
+OPTIONS=$(getopt -o hp:q: \
+    -l help,path:,qt:,no-addons,no-shortcuts \
+    -n "$(basename "$0")" -- "$@")
+
+eval set -- "$OPTIONS"
+
+while true; do
+  case "$1" in
+    -h|--help)      usage;exit 1;;
+    -p|--path)      D="$2";shift 2;;
+    -q|--qt)        P="$2";shift 2;;
+    --no-addons)    A=none;shift 1;;
+    --no-shortcuts) S=false;shift 1;;
+    --) break;;
+    *) echo "Internal error! Unknown option: $1";exit 1;;
+  esac
 done
 
-# ----------------------------------------------------------------------
-# directory, Jqt, Addons parameters
+#echo "path      = $D"
+#echo "addons    = $A"
+#echo "jqt       = $P"
+#echo "shortcuts = $S"
 
-if [ $DEFAULT = "1" ]; then
- D=home
- P=full
- A=all
-else
- D=${1:-"home"}
- P=${2:-"full"}
- A=${3:-"all"}
-fi
-
-# check likely incorrect directory
+# check directory
 case "$D" in
- none|slim|full|all)
- printf "The installation directory may not be one of the keywords: none|slim|full|all\n";
+ none|slim|full)
+ printf "The installation directory may not be one of the keywords: none|slim|full\n";
  exit 1 ;;
 esac
 
@@ -96,12 +72,6 @@ if [ "$D" = "home" ]; then D="$HOME"; fi
 case "$P" in
  none|slim|full) ;;
  *) printf "Invalid Jqt selection: $P\n"; exit 1 ;;
-esac
-
-# check Addons selection
-case "$A" in
- none|all) ;;
- *) printf "Invalid Addons selection: $A\n"; exit 1 ;;
 esac
 
 # ----------------------------------------------------------------------
@@ -136,32 +106,6 @@ if [ ! "$D" = "/usr" ]; then
 fi
 
 # ----------------------------------------------------------------------
-# install message + prompt to continue
-m="Installing"
-
-case "$P" in
-  "slim") m="$m slim Jqt system" ;;
-  "full") m="$m full Jqt system" ;;
-  *) m="$m base system with no Jqt" ;;
-esac
-
-if [ "$A" = "all" ]; then
- m="$m and all Addons"
-else
- m="$m and no Addons"
-fi
-
-printf "$m in $D/$V\n"
-
-if [ "$FORCE" = 0 ]; then
- printf 'OK to continue? (y/N) '
- read response
- case "${response:-N}" in   # defaults to N on Enter
-  [Yy]*) ;;                 # do nothing
-  *) printf "Not done.\n"; exit 1 ;;
- esac
-fi
-
 M=$(mktemp -d -t 'jtemp.XXXXXX')
 trap 'rm -rf "$M"' EXIT
 cd $M
@@ -210,6 +154,5 @@ else
  mkdir -p $D/$V
  cp -r $M/$V/* $D/$V
  cd $D/$V
- bin/jconsole -js "install 'system $P $A'"
+ bin/jconsole -js "install 'system $P $A $S'"
 fi
-
