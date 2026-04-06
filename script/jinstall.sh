@@ -110,11 +110,11 @@ M=$(mktemp -d -t 'jtemp.XXXXXX')
 trap 'rm -rf "$M"' EXIT
 cd $M
 
-S="https://www.jsoftware.com/download/$V/install"
+L="https://www.jsoftware.com/download/$V/install"
 
 if [ "$OS" = "Darwin" ]; then
  W=${V}_mac.zip
- curl -OL $S/$W
+ curl -OL $L/$W
  unzip $W
 else
  if [ "$OS" = "Linux" ]; then
@@ -138,7 +138,7 @@ else
    W=${V}_obsd.tar.gz
   fi
  fi
- wget $S/$W
+ wget $L/$W
  tar -xf $W
 fi
 
