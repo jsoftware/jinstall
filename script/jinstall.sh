@@ -36,22 +36,16 @@ P=full
 A=all
 S=true
 
-OPTIONS=$(getopt -o hp:q: \
-    -l help,path:,qt:,no-addons,no-shortcuts \
-    -n "$(basename "$0")" -- "$@")
-
-eval set -- "$OPTIONS"
-
-while true; do
-  case "$1" in
-    -h|--help)      usage;exit 1;;
-    -p|--path)      D="$2";shift 2;;
-    -q|--qt)        P="$2";shift 2;;
-    --no-addons)    A=none;shift 1;;
-    --no-shortcuts) S=false;shift 1;;
-    --) break;;
-    *) echo "Internal error! Unknown option: $1";exit 1;;
-  esac
+while [ $# -gt 0 ]; do
+ case "$1" in
+  -h|--help)      usage;exit 1;;
+  -p|--path)      D="$2";shift 2;;
+  -q|--qt)        P="$2";shift 2;;
+  --no-addons)    A=none;shift;;
+  --no-shortcuts) S=false;shift;;
+  --) break;;
+  *) echo "Unknown option: $1";exit 1;;
+ esac
 done
 
 #echo "path      = $D"
