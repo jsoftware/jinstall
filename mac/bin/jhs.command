@@ -1,4 +1,3 @@
 #!/bin/sh
-"`dirname "$0"`/jconsole" ~addons/ide/jhs/core.ijs -js " init_jhs_'' "
+"`dirname "$0"`/jconsole"  ~addons/ide/jhs/config/jhs.cfg
 
-# see ~addons/ide/jhs/config/jhs_default.ijs for config info
