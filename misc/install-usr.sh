@@ -22,14 +22,14 @@ fi
 
 P=`pwd`
 cd ..
-[ "j9.7" = ${PWD##*/} ] || [ "jlibrary" = ${PWD##*/} ] || { echo "directory not j9.7" ; exit 1; }
+[ "j9.8" = ${PWD##*/} ] || [ "jlibrary" = ${PWD##*/} ] || { echo "directory not j9.8" ; exit 1; }
 cd "$P"
 
 [ "Darwin" = "$(uname)" ] || [ "$(id -u)" = "0" ] || { echo "need sudo" ; exit 1; }
 
 if [ "Darwin" = "$(uname)" ]; then
 EXT=dylib
-VEXT=9.7.dylib  # libj
+VEXT=9.8.dylib  # libj
 GJEXT=dylib     # libjgmp
 GJEXT10=dylib   # libjgmp
 if [ "aarch64" = "$cpu" ]; then
@@ -45,7 +45,7 @@ else
 fi
 else
 EXT=so
-VEXT=so.9.7    # libj
+VEXT=so.9.8    # libj
 GJEXT=so       # libjgmp
 if [ "Linux" = "$(uname)" ]; then
 GJEXT10=so.10     # libjgmp
@@ -82,46 +82,46 @@ LIB=/usr/local/lib
 fi
 
 fi
-mkdir -p $SHR/j/9.7/addons/ide || { echo "can not create addon ide directory" ; exit 1; }
-mkdir -p $SHR/j/9.7/addons/data || { echo "can not create addon data directory" ; exit 1; }
-mkdir -p $SHR/j/9.7/addons/dev || { echo "can not create addon dev directory" ; exit 1; }
+mkdir -p $SHR/j/9.8/addons/ide || { echo "can not create addon ide directory" ; exit 1; }
+mkdir -p $SHR/j/9.8/addons/data || { echo "can not create addon data directory" ; exit 1; }
+mkdir -p $SHR/j/9.8/addons/dev || { echo "can not create addon dev directory" ; exit 1; }
 chmod 755 $SHR/j || { echo "can not set permission" ; exit 1; }
-mkdir -p $ETC/j/9.7 || { echo "can not create directory" ; exit 1; }
+mkdir -p $ETC/j/9.8 || { echo "can not create directory" ; exit 1; }
 chmod 755 $ETC/j || { echo "can not set permission" ; exit 1; }
-rm -rf $SHR/j/9.7/system
-cp -r ../system $SHR/j/9.7/.
-rm -rf $SHR/j/9.7/tools
-cp -r ../tools $SHR/j/9.7/.
-rm -rf $SHR/j/9.7/icons
-cp -r icons $SHR/j/9.7/.
-rm -rf $SHR/j/9.7/addons/ide/jhs
-cp -r ../addons/ide/jhs $SHR/j/9.7/addons/ide/. || true
-rm -rf $SHR/j/9.7/addons/data/dictionary
-cp -r ../addons/data/dictionary $SHR/j/9.7/addons/data/. || true
-rm -rf $SHR/j/9.7/addons/dev/eformat
-cp -r ../addons/dev/eformat $SHR/j/9.7/addons/dev/. || true
-find $SHR/j/9.7 -type d -exec chmod a+rx {} \+
-find $SHR/j/9.7 -type f -exec chmod a+r {} \+
-cp profile.ijs $ETC/j/9.7/.
-cp profilex_template.ijs $ETC/j/9.7/.
-find $ETC/j/9.7 -type d -exec chmod a+rx {} \+
-find $ETC/j/9.7 -type f -exec chmod a+r {} \+
+rm -rf $SHR/j/9.8/system
+cp -r ../system $SHR/j/9.8/.
+rm -rf $SHR/j/9.8/tools
+cp -r ../tools $SHR/j/9.8/.
+rm -rf $SHR/j/9.8/icons
+cp -r icons $SHR/j/9.8/.
+rm -rf $SHR/j/9.8/addons/ide/jhs
+cp -r ../addons/ide/jhs $SHR/j/9.8/addons/ide/. || true
+rm -rf $SHR/j/9.8/addons/data/dictionary
+cp -r ../addons/data/dictionary $SHR/j/9.8/addons/data/. || true
+rm -rf $SHR/j/9.8/addons/dev/eformat
+cp -r ../addons/dev/eformat $SHR/j/9.8/addons/dev/. || true
+find $SHR/j/9.8 -type d -exec chmod a+rx {} \+
+find $SHR/j/9.8 -type f -exec chmod a+r {} \+
+cp profile.ijs $ETC/j/9.8/.
+cp profilex_template.ijs $ETC/j/9.8/.
+find $ETC/j/9.8 -type d -exec chmod a+rx {} \+
+find $ETC/j/9.8 -type f -exec chmod a+r {} \+
 echo "#!/bin/sh" > ijconsole.sh
 echo "cd ~ && $BIN/ijconsole \"$@\"" >> ijconsole.sh
 mv ijconsole.sh $BIN/.
 chmod 755 $BIN/ijconsole.sh
-if [ -f "$BIN/ijconsole-9.7" ] ; then
-mv "$BIN/ijconsole-9.7" /tmp/ijconsole-9.7.old.$$
+if [ -f "$BIN/ijconsole-9.8" ] ; then
+mv "$BIN/ijconsole-9.8" /tmp/ijconsole-9.8.old.$$
 fi
-cp jconsole $BIN/ijconsole-9.7
-chmod 755 $BIN/ijconsole-9.7
+cp jconsole $BIN/ijconsole-9.8
+chmod 755 $BIN/ijconsole-9.8
 if [ -f "$BIN/ijconsole" ] ; then
 mv "$BIN/ijconsole" /tmp/ijconsole.old.$$
 fi
 if [ "Linux" = "$(uname)" ]; then
-update-alternatives --install $BIN/ijconsole ijconsole $BIN/ijconsole-9.7 907 || (cd $BIN && ln -sf ijconsole-9.7 ijconsole)
+update-alternatives --install $BIN/ijconsole ijconsole $BIN/ijconsole-9.8 908 || (cd $BIN && ln -sf ijconsole-9.8 ijconsole)
 else
-(cd $BIN && ln -sf ijconsole-9.7 ijconsole)
+(cd $BIN && ln -sf ijconsole-9.8 ijconsole)
 fi
 
 if [ -d "$LIB" ] ; then
