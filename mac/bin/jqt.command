@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 cd "`dirname "$0"`/.."
 export QT_PLUGIN_PATH="$(pwd)"/Qt/plugins
-arch_name="$(sysctl -n machdep.cpu.brand_string)"
 
-if [[ "${arch_name}" = *Apple* ]]; then
+if [[ "$(uname -v)" = *ARM64* ]]; then
   arch -arm64 bin/jqt "$@"
 else
-  bin/jqt "$@"
+  arch -x86_64 bin/jqt "$@"
 fi
